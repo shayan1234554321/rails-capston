@@ -3,9 +3,12 @@ class GroupsController < ApplicationController
       @groups = Group.includes(:entities).where(user: current_user)
     end
 
+    def new
+    end
+
     def create
       current_user.groups.create(group_params)
-      redirect_to root_path
+      redirect_to groups_path
     end
 
     private

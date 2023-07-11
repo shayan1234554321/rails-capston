@@ -1,0 +1,27 @@
+<header>
+    <div>
+        <%= link_to image_tag('back.png'), groups_path, id: "back-icon" %>
+    </div>
+    <div>
+        Categories
+    </div>
+    <div>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+    </div>
+</header>
+
+<%= form_for(Group.new, url: groups_path) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :icon %><br />
+    <%= f.file_field :icon %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Group" %>
+  </div>
+<% end %>

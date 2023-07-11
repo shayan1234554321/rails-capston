@@ -1,20 +1,12 @@
 <header>
     <div>
-        <% if request.path == root_path %>
-            <%= link_to image_tag('menu.png'), id: "menu-icon" %>
-        <% else %>
-            <%= link_to image_tag('back.png'), route_path, id: "back-icon" %>
-        <% end %>
+        <%= image_tag 'menu.png', id: "menu-icon" %>
     </div>
     <div>
-        GROUPS
+        Categories
     </div>
     <div>
-        <% if user_signed_in? %>
-            Logout
-        <% else %>
-            Login
-        <% end %>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %>
     </div>
 </header>
 
@@ -35,24 +27,6 @@
     </div>
 <% end %>
 
-<%= form_for(Group.new, url: groups_path) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :icon %><br />
-    <%= f.file_field :icon %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Create Group" %>
-  </div>
-<% end %>
-
 <footer>
-    <button>
-        Add Group
-    </button>
+    <%= link_to "add a new category", new_group_path %>  
 </footer>

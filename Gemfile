@@ -74,3 +74,5 @@ end
 
 gem 'devise'
 gem 'activestorage'
+gem 'rspec-rails'
+gem 'rails-controller-testing'

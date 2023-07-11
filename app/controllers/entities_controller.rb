@@ -3,6 +3,10 @@ class EntitiesController < ApplicationController
       @group = Group.includes(:entities).find_by_id(params[:group_id])
     end
   
+    def new
+      @group = Group.find_by_id(params[:group_id])
+    end
+
     def create
       @group = Group.find(params[:group_id])
       @entity =  @group.entities.new({user: current_user , **entity_params})

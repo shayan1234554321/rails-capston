@@ -1,24 +1,16 @@
 <header>
     <div>
-        <% if request.path == root_path %>
-            <%= image_tag('menu.png') %>
-        <% else %>
-            <%= link_to image_tag('back.png'), root_path, id: "back-icon" %>
-        <% end %>
+        <%= link_to image_tag('back.png'), groups_path, id: "back-icon" %>
     </div>
     <div>
-        GROUPS
+        Transactions
     </div>
     <div>
-        <% if user_signed_in? %>
-            Logout
-        <% else %>
-            Login
-        <% end %>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %>
     </div>
 </header>
 
-<div class="group-card" >
+<div>
     <%= image_tag url_for(@group.icon), alt: "group icon" %>
     <div>
         <h2> <%= @group.name %> </h2>
@@ -38,24 +30,6 @@
     </div>
 <% end %>
 
-<%= form_for(Entity.new, url: group_entities_path(group_id: @group.id)) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Create Entity" %>
-  </div>
-<% end %>
-
 <footer>
-    <button>
-        Add Entity
-    </button>
+    <%= link_to "add a new transaction", new_group_entity_path(group_id: @group.id) %>  
 </footer>
