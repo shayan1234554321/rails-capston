@@ -1,0 +1,58 @@
+<header>
+    <div>
+        <% if request.path == root_path %>
+            <%= link_to image_tag('menu.png'), id: "menu-icon" %>
+        <% else %>
+            <%= link_to image_tag('back.png'), route_path, id: "back-icon" %>
+        <% end %>
+    </div>
+    <div>
+        GROUPS
+    </div>
+    <div>
+        <% if user_signed_in? %>
+            Logout
+        <% else %>
+            Login
+        <% end %>
+    </div>
+</header>
+
+<% @groups.each do | group | %>
+    <div class="group-card" >
+        <%= link_to group_expenses_path(group_id: group.id) do %>
+            <%= image_tag url_for(group.icon), alt: "group icon" %>
+            <div>
+                <h2> <%= group.name %> </h2>
+                <% if group && group.entities.present? %>
+                    $ <%= group.entities.sum { |entity| entity[:amount] } %>
+                <% else %>
+                    $ 0
+                <% end %>
+            </div>
+            <h3> <%= group.created_at %> </h3>
+        <% end %>
+    </div>
+<% end %>
+
+<%= form_for(Group.new, url: groups_path) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :icon %><br />
+    <%= f.file_field :icon %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Group" %>
+  </div>
+<% end %>
+
+<footer>
+    <button>
+        Add Group
+    </button>
+</footer>
