@@ -3,7 +3,7 @@
         <% if request.path == root_path %>
             <%= image_tag('menu.png') %>
         <% else %>
-            <%= link_to image_tag('back.png'), route_path, id: "back-icon" %>
+            <%= link_to image_tag('back.png'), root_path, id: "back-icon" %>
         <% end %>
     </div>
     <div>
@@ -18,20 +18,23 @@
     </div>
 </header>
 
-<% @groups.each do | group | %>
-    <div class="group-card" >
-        <%= link_to group_expenses_path(group_id: group.id) do %>
-            <%= image_tag url_for(group.icon), alt: "group icon" %>
-            <div>
-                <h2> <%= group.name %> </h2>
-                <% if group && group.entities.present? %>
-                    <%= group.entities.sum { |entity| entity[:amount] } %>
-                <% else %>
-                    No entities
-                <% end %>
-            </div>
-            <h3> <%= group.created_at %> </h3>
+<div class="group-card" >
+    <%= image_tag url_for(@group.icon), alt: "group icon" %>
+    <div>
+        <h2> <%= @group.name %> </h2>
+        <% if @group.entities.present? %>
+            $ <%= @group.entities.sum { |entity| entity[:amount] } %>
+        <% else %>
+            $ 0
         <% end %>
+    </div>
+</div>
+
+<% @group.entities.each do | entity | %>
+    <div class="entity-card" >
+        <h2> <%= entity.name %> </h2>
+        <h3> Amount: <%= entity.amount %> </h3>
+        <h3> <%= entity.created_at %> </h3>
     </div>
 <% end %>
 

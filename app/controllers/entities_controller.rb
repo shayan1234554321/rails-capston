@@ -1,12 +1,11 @@
 class EntitiesController < ApplicationController
     def index
-      @group = Group.includes(:entities).find(id: params[:group_id])
+      @group = Group.includes(:entities).find_by_id(params[:group_id])
     end
   
     def create
       @group = Group.find(params[:group_id])
-      @entity = @group.entities.new(entity_params)
-      @entity.user = current_user
+      @entity =  @group.entities.new({user: current_user , **entity_params})
       @entity.save
 
       redirect_to group_entities_path(@group)
