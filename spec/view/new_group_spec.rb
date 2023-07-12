@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'groups/new', type: :feature do
-
   before(:each) do
     @user = User.create(name: 'shayan', email: 'shayan@gmail.com', password: 'abc123',
-        password_confirmation: 'abc123')
+                        password_confirmation: 'abc123')
 
     login_as(@user, scope: :user)
   end
@@ -21,5 +20,4 @@ RSpec.describe 'groups/new', type: :feature do
     expect(current_path).to eq(groups_path)
     expect(page).to have_content('add a new category')
   end
-
 end

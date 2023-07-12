@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-
   before(:each) do
     @user = User.create(name: 'Test User', email: 'test@example.com', password: 'password')
     @group = Group.create(name: 'Test Group', user: @user)
   end
 
   describe 'validations' do
-
     it 'is not valid without a name' do
       @group.name = nil
       expect(@group).to_not be_valid
@@ -23,7 +21,7 @@ RSpec.describe Group, type: :model do
   describe 'associations' do
     it 'belongs to a user' do
       association = Group.reflect_on_association(:user)
-      expect(association.macro).to eq(:belongs_to) 
+      expect(association.macro).to eq(:belongs_to)
     end
 
     it 'has many entities' do
@@ -31,5 +29,4 @@ RSpec.describe Group, type: :model do
       expect(association.macro).to eq(:has_many)
     end
   end
-
 end

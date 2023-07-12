@@ -72,7 +72,7 @@ group :test do
 end
 
 
-gem 'devise'
 gem 'activestorage'
-gem 'rspec-rails'
+gem 'devise'
 gem 'rails-controller-testing'
+gem 'rspec-rails'

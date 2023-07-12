@@ -15,7 +15,7 @@ RSpec.describe 'groups/index', type: :feature do
     @groups = [@group]
   end
 
-  it "displays the header with menu icon, title and logout button" do
+  it 'displays the header with menu icon, title and logout button' do
     visit groups_path
     expect(page).to have_content('add a new category')
   end
@@ -23,7 +23,7 @@ RSpec.describe 'groups/index', type: :feature do
   it 'displays each group name' do
     visit groups_path
     @groups.each do |group|
-      expect(page).to have_content(group.name) 
+      expect(page).to have_content(group.name)
     end
   end
 
@@ -45,5 +45,4 @@ RSpec.describe 'groups/index', type: :feature do
     visit groups_path
     expect(page).to have_link('add a new category', href: new_group_path)
   end
-
 end

@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'entites/new', type: :feature do
-
   before(:each) do
     @user = User.create(name: 'shayan', email: 'shayan@gmail.com', password: 'abc123',
-        password_confirmation: 'abc123')
+                        password_confirmation: 'abc123')
 
     login_as(@user, scope: :user)
     file_path = Rails.root.join('app', 'assets', 'images', 'back.png')
@@ -25,13 +24,13 @@ RSpec.describe 'entites/new', type: :feature do
   end
 
   it 'has an amount field' do
-    visit new_group_entity_path(@group)  
+    visit new_group_entity_path(@group)
     expect(page).to have_field('entity_amount')
   end
 
   it 'preselects the current group' do
     visit new_group_entity_path(@group)
-    expect(find_field('entity_group_id').value).to eq(@group.id.to_s) 
+    expect(find_field('entity_group_id').value).to eq(@group.id.to_s)
   end
 
   it 'has a submit button' do
@@ -47,5 +46,4 @@ RSpec.describe 'entites/new', type: :feature do
 
     expect(current_path).to eq(group_entities_path(@group))
   end
-
 end
