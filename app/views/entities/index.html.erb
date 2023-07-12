@@ -1,34 +1,51 @@
-<header>
+<header class="fixed" >
     <div>
         <%= link_to image_tag('back.png'), groups_path, id: "back-icon" %>
     </div>
-    <div>
+    <h2>
         Transactions
-    </div>
+    </h2>
     <div>
         <%= button_to "Logout", destroy_user_session_path, method: :delete %>
     </div>
 </header>
 
-<div>
-    <%= image_tag url_for(@group.icon), alt: "group icon" %>
-    <div>
-        <h2> <%= @group.name %> </h2>
-        <% if @group.entities.present? %>
-            $ <%= @group.entities.sum { |entity| entity[:amount] } %>
-        <% else %>
-            $ 0
+<div class="entities" >
+    <div class="group-card" >
+        <%= image_tag url_for(@group.icon), alt: "group icon" %>
+        <div class="group-card-inside" >
+            <div>
+                <h4> <%= @group.name %> </h4>
+                <span style="opacity: 0 ;" >
+                .
+                </span>
+            </div>
+            <h4> <%= @group.created_at %> </h4>
+        </div>
+    </div>
+    <div class="entities-container">
+        <% @entities.each do | entity | %>
+            <div class="entity-card" >
+                <div>
+                    <h4> <%= entity.name %> </h4>
+                    <h4> Amount: <%= entity.amount %> </h4>
+                </div>
+                <span>
+                    <%= image_tag 'calendar.png' %>
+                    <h5> <%= entity.created_at %> </h5>
+                </span>
+            </div>
         <% end %>
+        <div class="entity-card" >
+            <h3> TOTAL PAYMENT </h3>
+            <h3> <% if @group && @group.entities.present? %>
+                        $ <%= @group.entities.sum { |entity| entity[:amount] } %>
+                    <% else %>
+                        $ 0
+                    <% end %> </h4>
+        </div>
     </div>
 </div>
-
-<% @entities.each do | entity | %>
-    <div class="entity-card" >
-        <h2> <%= entity.name %> </h2>
-        <h3> Amount: <%= entity.amount %> </h3>
-        <h3> <%= entity.created_at %> </h3>
-    </div>
-<% end %>
 
 <footer>
     <%= link_to "add a new transaction", new_group_entity_path(group_id: @group.id) %>  

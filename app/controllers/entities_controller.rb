@@ -1,4 +1,6 @@
 class EntitiesController < ApplicationController
+  before_action :authenticate_user!
+  
     def index
       @group = Group.includes(:entities).find_by_id(params[:group_id])
       @entities = @group.entities.order(created_at: :desc)

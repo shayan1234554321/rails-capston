@@ -2,9 +2,9 @@
     <div>
       <%= link_to image_tag('back.png'), group_entities_path(group_id: @group.id), id: "back-icon" %>
     </div>
-    <div>
+    <h2>
         Transactions
-    </div>
+    </h2>
     <div>
         <%= button_to "Logout", destroy_user_session_path, method: :delete %>
     </div>
@@ -12,13 +12,11 @@
 
 <%= form_for(Entity.new, url: group_entities_path(group_id: @group.id)) do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
+    <%= f.text_field :name, autocomplete: "name" , placeholder:"Name" %>
   </div>
 
   <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
+    <%= f.number_field :amount , placeholder:"Amount" %>
   </div>
   
   <div class="field">
