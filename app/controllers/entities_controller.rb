@@ -12,7 +12,7 @@ class EntitiesController < ApplicationController
 
   def create
     @group = Group.find(params[:group_id])
-    @entity = @group.entities.new({ user: current_user, **entity_params })
+    @entity = @group.entities.new({ author_id: current_user.id, **entity_params })
     @entity.save
 
     redirect_to group_entities_path(@group)
@@ -21,6 +21,6 @@ class EntitiesController < ApplicationController
   private
 
   def entity_params
-    params.required(:entity).permit(:name, :amount)
+    params.required(:entity).permit(:name, :amount, :group_id)
   end
 end

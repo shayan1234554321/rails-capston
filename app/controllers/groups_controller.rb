@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @groups = Group.includes(:entities).where(user: current_user)
+    @groups = Group.includes(:entities).where(author: current_user)
   end
 
   def new; end
