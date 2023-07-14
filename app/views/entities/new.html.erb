@@ -1,0 +1,30 @@
+<header>
+    <div>
+      <%= link_to image_tag('back.png'), group_entities_path(group_id: @group.id), id: "back-icon" %>
+    </div>
+    <h2>
+        Transactions
+    </h2>
+    <div>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+    </div>
+</header>
+
+<%= form_for(Entity.new, url: group_entities_path(group_id: @group.id)) do |f| %>
+  <div class="field">
+    <%= f.text_field :name, autocomplete: "name" , placeholder:"Name" %>
+  </div>
+
+  <div class="field">
+    <%= f.number_field :amount , placeholder:"Amount" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.collection_select :group_id, current_user.groups, :id, :name, {class: "options" , selected: @group.id} %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Entity" %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<header class="fixed" >
+    <div>
+        <%= image_tag 'menu.png', id: "menu-icon" %>
+    </div>
+    <h2>
+        Categories
+    </h2>
+    <div>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+    </div>
+</header>
+
+<div class="group" >
+    <% @groups.each do | group | %>
+        <%= link_to group_entities_path(group_id: group.id) do %>
+            <div class="group-card" >
+                <%= image_tag url_for(group.icon), alt: "group icon" %>
+                <div class="group-card-inside" >
+                    <div>
+                        <h4> <%= group.name %> </h4>
+                        <% if group && group.entities.present? %>
+                            $ <%= group.entities.sum { |entity| entity[:amount] } %>
+                        <% else %>
+                            $ 0
+                        <% end %>
+                    </div>
+                    <h4> <%= group.created_at %> </h4>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>
+
+<footer>
+    <%= link_to "add a new category", new_group_path %>  
+</footer>
