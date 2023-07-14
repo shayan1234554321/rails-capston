@@ -6,4 +6,5 @@ class Group < ApplicationRecord
   has_one_attached :icon
 
   validates :name, :icon, :author, presence: true
+  validates :author, numericality: { only_integer: true }
 end
